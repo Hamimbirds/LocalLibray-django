@@ -33,6 +33,7 @@ def index(request):
 
 class BookListView(generic.ListView):
     model = Book
+    paginate_by = 1
 
     def get_context_data(self, **kwargs):
         # Call the base implementation first to get the context
@@ -49,3 +50,18 @@ class BookDetailView(generic.DetailView):
 def book_detail_view(request, primary_key):
     book = get_object_or_404(Book, pk=primary_key)
     return render(request, 'catalog/book_detail.html', context={'book': book})
+
+
+class AuthorListView(generic.ListView):
+    """Generic class-based list view for a list of authors."""
+    model = Author
+    paginate_by = 1
+
+
+class AuthorDetailView(generic.DetailView):
+        model = Author
+
+
+    def book_detail_view(request, primary_key):
+        author = get_object_or_404(author, pk=primary_key)
+        return render(request, 'catalog/author_detail.html', context={'author': author})
